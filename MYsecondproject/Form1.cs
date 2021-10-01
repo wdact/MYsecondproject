@@ -20,7 +20,7 @@ namespace MYsecondproject
             InitializeComponent();
             try
             {
-                port = new SerialPort("COM7");
+                port = new SerialPort(ComName);
                 port.RtsEnable = true;
                 port.DtrEnable = true;
                 port.DataReceived += Port_DataReceived;
@@ -31,12 +31,12 @@ namespace MYsecondproject
             catch (Exception ee)
             {
                 MessageBox.Show("Оборудование не подключено!");
-                Close();
+            //    Close();
             }
-
-
-
         }
+
+        private string ComName => File.ReadAllText(path: "ComName.txt");
+
         List<string> allCommands = new List<string>();
         private void Port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
